@@ -25,13 +25,11 @@ I am a dedicated and creative individual with a passion for learning and buildin
 [![Google Cloud](https://img.shields.io/badge/Google%20Cloud-%234285F4.svg?logo=google-cloud&logoColor=white&style=plastic)](#)
 [![W3Schools](https://img.shields.io/badge/W3Schools-04AA6D?logo=w3schools&logoColor=fff&style=plastic)](#)
 
-
-
 🚀 Featured Projects:
 
-Video and Audio Collection App: A PostgreSQL-powered web application for managing multimedia content, showcasing advanced database management and intuitive design.
-Game Design Portfolio: A selection of mini-games and interactive prototypes developed in Unity, demonstrating creativity and technical proficiency.
-Web Portfolio: The GitHub-hosted portfolio you're currently visiting, which highlights my journey and achievements as a developer and designer.
+**Video and Audio Collection App:** A PostgreSQL-powered web application for managing multimedia content, showcasing advanced database management and intuitive design.
+**Game Design Portfolio:** A selection of mini-games and interactive prototypes developed in Unity, demonstrating creativity and technical proficiency.
+**Web Portfolio:** The GitHub-hosted portfolio you're currently visiting, which highlights my journey and achievements as a developer and designer.
 Feel free to explore my projects, connect with me on LinkedIn, or leave feedback. Let’s create something amazing together!
 
 📫 How to reach me:
