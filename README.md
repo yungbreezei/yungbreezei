@@ -40,6 +40,11 @@ Email or LinkedIn messaging.
 I love creating videos where I take on one-hour gaming challenges! It’s my way of analyzing games and giving titles I’d never usually play a fair shot.
 
 
+## Table of Contents
+- [How to Create Your Profile?](#how-to-create-your-profile)
+- [How to Customize Markdown files?](#how-to-customize-markdown-files)
+- [How to Create New Repository?](#how-to-create-new-repository)
+
 <!--
 **yungbreezei/yungbreezei** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
