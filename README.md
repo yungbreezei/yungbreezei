@@ -1,4 +1,4 @@
-## 👋 Hi there! Welcome to my portfolio!
+## 👋 Hi there, I'm Bria!
 
 I am a dedicated and creative individual with a passion for learning and building impactful projects. I thrive on solving problems and bringing ideas to life, especially in the realms of gaming, design, and web development.
 
