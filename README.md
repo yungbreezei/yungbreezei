@@ -41,7 +41,7 @@ I love creating videos where I take on one-hour gaming challenges! It’s my way
 
 
 ## Table of Contents
-- [How to Create Your Profile?](#how-to-create-your-profile)
+- [Project #1: Weather App](#Weather-App)
 - [How to Customize Markdown files?](#how-to-customize-markdown-files)
 - [How to Create New Repository?](#how-to-create-new-repository)
 
