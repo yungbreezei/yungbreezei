@@ -41,7 +41,7 @@ I love creating videos where I take on one-hour gaming challenges! It’s my way
 
 
 ## Table of Contents
-- [Project #1: Weather App](#Weather-App)
+- [Project #1: Weather App](Weather-Data-App)
 - [How to Customize Markdown files?](#how-to-customize-markdown-files)
 - [How to Create New Repository?](#how-to-create-new-repository)
 
