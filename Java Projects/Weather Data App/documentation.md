@@ -20,8 +20,10 @@ Create a sensible interface for a user to garner useful information from your st
 ***
 
 ## Code
-[City.java](https://github.com/yungbreezei/yungbreezei/blob/16d7b0e92ce8d25a4192854f21abb1918dd68e31/Java%20Projects/Weather%20Data%20App/City.java)
-ClimateInfo.java - 
+[City.java](https://github.com/yungbreezei/yungbreezei/blob/16d7b0e92ce8d25a4192854f21abb1918dd68e31/Java%20Projects/Weather%20Data%20App/City.java)  - Multiple Cities to choose from to get the weather forecast from
+
+[ClimateInfo.java](https://github.com/yungbreezei/yungbreezei/blob/16d7b0e92ce8d25a4192854f21abb1918dd68e31/Java%20Projects/Weather%20Data%20App/ClimateInfo.java)  - Climate Info for coldest month and wettest month
+
 FoodOption.java - 
 getUserInput.java - 
 getWeatherData.java - 
