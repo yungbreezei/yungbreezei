@@ -43,7 +43,7 @@ I love creating videos where I take on one-hour gaming challenges! It’s my way
 
 
 ## Table of Contents
-- [Project #1: Weather App](https://github.com/yungbreezei/yungbreezei/blob/Java-Projects/Week10.java)
+- [Project #1: Weather App](https://github.com/yungbreezei/yungbreezei/blob/9d0f57c2ea452e20c6edeacd684c8b2cf3f76586/Java%20Projects/Weather%20Data%20App/documentation.md)
 - [How to Customize Markdown files?](#how-to-customize-markdown-files)
 - [How to Create New Repository?](#how-to-create-new-repository)
 
