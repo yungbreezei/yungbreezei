@@ -4,7 +4,7 @@
 ## 📚 Table of Contents
 - [Objective](#Objective)
 - [Weather API](#Weather-API)
-- [Question and Solution](#question-and-solution)
+- [Code Preview](#Video-Example)
 
 ***
 
@@ -19,6 +19,12 @@ Create a sensible interface for a user to garner useful information from your st
 
 ***
 
+## Video Example
+
+
+***
+
+## Code
 ````java
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
