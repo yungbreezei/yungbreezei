@@ -2,31 +2,20 @@
 <img src="https://static.vecteezy.com/system/resources/previews/024/825/182/original/3d-weather-icon-day-with-rain-free-png.png" alt="Image" width="300" height="320">
 
 ## 📚 Table of Contents
-- [Business Task](#business-task)
-- [Entity Relationship Diagram](#entity-relationship-diagram)
+- [Objective](#Objective)
+- [Weather API](#Weather-API)
 - [Question and Solution](#question-and-solution)
 
 ***
 
 ## Objective
-Danny wants to use the data to answer a few simple questions about his customers, especially about their visiting patterns, how much money they’ve spent and also which menu items are their favourite. 
+Go to [Open Weather Map API](https://openweathermap.org/api) decide which forecast you want to grab. Use the documentation and sample calls to determine what the data looks like and what kinds of objects you’ll need to create. You can choose to base your calls to the API on user inputs (location, time, etc.), or just make the same call on each run based on the current date and time and a fixed location. Once you’ve stored your weather data, display a menu to the user that lets them repeatedly elect to see different parts of that data, or exit the program. Make sure your menu is sensible and includes navigation you’d want to use. 
 
-***
-
-````java
-/**
- *
- * @author Bria
- */
-public class City {
-    
-}
-````
-
-***
+***`
 
 ## Weather API
-Danny wants to use the data to answer a few simple questions about his customers, especially about their visiting patterns, how much money they’ve spent and also which menu items are their favourite. 
+Get json from the weather API and store it in objects with appropriate attributes.
+Create a sensible interface for a user to garner useful information from your stored weather data.
 
 ***
 
