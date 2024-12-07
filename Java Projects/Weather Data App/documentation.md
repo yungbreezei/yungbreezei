@@ -20,10 +20,10 @@ Create a sensible interface for a user to garner useful information from your st
 ***
 
 ## Code
-[- [City.java](#https://github.com/yungbreezei/yungbreezei/blob/main/Java%20Projects/Weather%20Data%20App/City.java)
-](https://github.com/yungbreezei/yungbreezei/blob/main/Java%20Projects/Weather%20Data%20App/City.java)ClimateInfo.java - 
+City.java -
+ClimateInfo.java - 
 FoodOption.java - 
-getUserInput.java = 
+getUserInput.java - 
 getWeatherData.java - 
 PopularSpot.java - 
 TemperatureConfersion.java -
