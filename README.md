@@ -28,7 +28,9 @@ I am a dedicated and creative individual with a passion for learning and buildin
 🚀 Featured Projects:
 
 **Video and Audio Collection App:** A PostgreSQL-powered web application for managing multimedia content, showcasing advanced database management and intuitive design.
+
 **Game Design Portfolio:** A selection of mini-games and interactive prototypes developed in Unity, demonstrating creativity and technical proficiency.
+
 **Web Portfolio:** The GitHub-hosted portfolio you're currently visiting, which highlights my journey and achievements as a developer and designer.
 Feel free to explore my projects, connect with me on LinkedIn, or leave feedback. Let’s create something amazing together!
 
