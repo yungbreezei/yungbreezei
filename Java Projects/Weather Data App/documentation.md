@@ -4,7 +4,7 @@
 ## 📚 Table of Contents
 - [Objective](#Objective)
 - [Weather API](#Weather-API)
-- [Code Preview](#Video-Example)
+- [Code Preview](#code)
 
 ***
 
