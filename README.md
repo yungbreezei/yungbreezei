@@ -45,7 +45,6 @@ I love creating videos where I take on one-hour gaming challenges! It’s my way
 ## Table of Contents
 - [Project: Weather App (JAVA)](https://github.com/yungbreezei/yungbreezei/blob/9d0f57c2ea452e20c6edeacd684c8b2cf3f76586/Java%20Projects/Weather%20Data%20App/documentation.md)
 - [Project: Audio/Video Collection Web App (HTML/CSS/JAVASCRIPT)](https://github.com/yungbreezei/yungbreezei/blob/9d0f57c2ea452e20c6edeacd684c8b2cf3f76586/Web%20Development/Audio%20%26%20Video%20Collection%20App.md)
-- [How to Create New Repository?](#how-to-create-new-repository)
 
 <!--
 **yungbreezei/yungbreezei** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
