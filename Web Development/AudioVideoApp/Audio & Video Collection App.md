@@ -11,7 +11,7 @@ Front-end, processing, back-end, and general design diagrams illustrating your w
 
 
 ***
-- [QUERY RESULTS](https://github.com/yungbreezei/yungbreezei/blob/main/Web%20Development/AudioVideoApp/BriaWright-SQLdata-media.txt)
+- [QUERY RESULTS](https://github.com/yungbreezei/yungbreezei/blob/main/Web%20Development/AudioVideoApp/SQLdata-media.txt)
 
 ````sql
 CREATE TABLE pictures (
