@@ -1,0 +1,80 @@
+postgres=# SELECT * FROM media;
+ id |      title      |  genre  |      artist       | type | year |                  url
+----+-----------------+---------+-------------------+------+------+----------------------------------------
+  1 | Misery Business | ALT POP | Paramore          | MP4  | 2007 | http://example.com/misery-business.mp4
+  2 | HUMBLE          | RAP     | Kendrick Lamar    | MP4  | 2017 | http://example.com/humble.mp4
+  3 | 2008            | ALT POP | Rex Orange County | MP4  | 2024 | http://example.com/2008.mp4
+  4 | Blinding Lights | POP     | The Weeknd        | MP4  | 2020 | http://example.com/blinding-lights.mp4
+  5 | N95             | RAP     | Kendrick Lamar    | MP4  | 2022 | http://example.com/n95.mp4
+(5 rows)
+
+
+postgres=# SELECT DISTINCT genre FROM media;
+  genre
+---------
+ ALT POP
+ RAP
+ POP
+(3 rows)
+
+
+
+
+
+
+
+
+
+
+postgres=# SELECT * FROM video;
+ id |       title        |  genre   |      creator      | release_year |                    url
+
+----+--------------------+----------+-------------------+--------------+-------------------------------------------
+  1 | Inception          | Sci-Fi   | Christopher Nolan |         2010 | http://example.com/inception.mp4
+  2 | Interstellar       | Sci-Fi   | Christopher Nolan |         2014 | http://example.com/interstellar.mp4  3 | Parasite           | Thriller | Bong Joon-ho      |         2019 | http://example.com/parasite.mp4
+  4 | The Matrix         | Action   | Wachowski Sisters |         1999 | http://example.com/the-matrix.mp4
+  5 | The Social Network | Drama    | David Fincher     |         2010 | http://example.com/the-social-network.mp4
+(5 rows)
+
+postgres=# SELECT DISTINCT creator FROM video;
+      creator
+-------------------
+ Bong Joon-ho
+ Christopher Nolan
+ Wachowski Sisters
+ David Fincher
+(4 rows)
+
+
+
+
+
+
+
+
+
+
+
+postgres=# SELECT * FROM pictures;
+ id |       title        | category  |     photographer      | year_taken |                    url
+
+----+--------------------+-----------+-----------------------+------------+-------------------------------------------
+  1 | Sunset Bliss       | Nature    | Annie Leibovitz       |       2018 | http://example.com/sunset-bliss.jpg
+  2 | City Lights        | Urban     | Steve McCurry         |       2019 | http://example.com/city-lights.jpg
+  3 | Mountain Peaks     | Landscape | Peter Lik             |       2020 | http://example.com/mountain-peaks.jpg
+  4 | Autumn Leaves      | Nature    | Galen Rowell          |       2017 | http://example.com/autumn-leaves.jpg
+  5 | Vintage Car        | Lifestyle | Henri Cartier-Bresson |       2016 | http://example.com/vintage-car.jpg
+  6 | Ocean Waves        | Seascape  | Sebastiao Salgado     |       2021 | http://example.com/ocean-waves.jpg
+  7 | Portrait of a Lady | Portrait  | Diane Arbus           |       2015 | http://example.com/portrait-of-a-lady.jpg
+(7 rows)
+
+
+postgres=# SELECT * FROM pictures
+postgres-# WHERE year_taken BETWEEN 2017 AND 2020;
+ id |     title      | category  |  photographer   | year_taken |                  url
+----+----------------+-----------+-----------------+------------+---------------------------------------
+  1 | Sunset Bliss   | Nature    | Annie Leibovitz |       2018 | http://example.com/sunset-bliss.jpg
+  2 | City Lights    | Urban     | Steve McCurry   |       2019 | http://example.com/city-lights.jpg
+  3 | Mountain Peaks | Landscape | Peter Lik       |       2020 | http://example.com/mountain-peaks.jpg
+  4 | Autumn Leaves  | Nature    | Galen Rowell    |       2017 | http://example.com/autumn-leaves.jpg
+(4 rows)
