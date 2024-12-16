@@ -18,14 +18,6 @@ postgres=# SELECT DISTINCT genre FROM media;
 (3 rows)
 
 
-
-
-
-
-
-
-
-
 postgres=# SELECT * FROM video;
  id |       title        |  genre   |      creator      | release_year |                    url
 
@@ -44,15 +36,6 @@ postgres=# SELECT DISTINCT creator FROM video;
  Wachowski Sisters
  David Fincher
 (4 rows)
-
-
-
-
-
-
-
-
-
 
 
 postgres=# SELECT * FROM pictures;
