@@ -1,6 +1,5 @@
 # 🎶 Project: Audio/Video Collection Web App
-<img src="https://user-images.githubusercontent.com/81607668/127727503-9d9e7a25-93cb-4f95-8bd0-20b87cb4b459.png" alt="Image" width="300" height="320">
-
+![AppLogo](https://github.com/user-attachments/assets/5e04318f-8299-46da-83cc-d4be96daeab4)
 
 ***
 
