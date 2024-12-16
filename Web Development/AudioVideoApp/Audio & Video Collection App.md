@@ -1,5 +1,5 @@
 # 🎶 Project: Audio/Video Collection Web App
-![AppLogo](https://github.com/user-attachments/assets/5e04318f-8299-46da-83cc-d4be96daeab4)
+![AppLogo](https://github.com/username/repository/blob/main/Web%20Development/AudioVideoApp/images/Designer.png?raw=true)
 
 ***
 
