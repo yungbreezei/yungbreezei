@@ -1,5 +1,5 @@
 # 🎶 Project: Audio/Video Collection Web App
-![AppLogo](https://github.com/username/repository/blob/main/Web%20Development/AudioVideoApp/images/Designer.png?raw=true)
+![AppLogo](https://github.com/yungbreezei/yungbreezei/blob/main/Web%20Development/AudioVideoApp/images/Designer.png)
 
 ***
 
@@ -9,12 +9,32 @@ Front-end, processing, back-end, and general design diagrams illustrating your w
 ***
 
 ````sql
-SELECT 
-  sales.customer_id, 
-  SUM(menu.price) AS total_sales
-FROM dannys_diner.sales
-INNER JOIN dannys_diner.menu
-  ON sales.product_id = menu.product_id
-GROUP BY sales.customer_id
-ORDER BY sales.customer_id ASC; 
+CREATE TABLE pictures (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    category VARCHAR(50),
+    photographer VARCHAR(100),
+    year_taken INT,
+    url VARCHAR(255)
+);
+
+CREATE TABLE media (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(255),
+    genre VARCHAR(50),
+    artist VARCHAR(100),
+    type VARCHAR(10),
+    year INT,
+    url VARCHAR(255)
+);
+
+CREATE TABLE video (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    genre VARCHAR(50),
+    creator VARCHAR(100),
+    release_year INT,
+    url VARCHAR(255)
+);
+
 ````
