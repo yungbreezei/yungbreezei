@@ -1,13 +1,18 @@
 package week9Project;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
+import week9Project.exceptions.CarAlreadyParkedException;
+import week9Project.exceptions.CarNotParkedException;
 import week9Project.exceptions.InvalidParkingPassException;
+import week9Project.exceptions.ParkingDurationTooLongException;
 import week9Project.exceptions.ParkingLotFullException;
 
 public class ParkingLot {
+	
 	
 	// Attributes
     private String lotId;                           // Unique identifier for the parking lot
@@ -17,6 +22,7 @@ public class ParkingLot {
     private boolean scanOnExit;                     // If true, charge on exit; otherwise, on entry
     public List<ParkingTransaction> transactions;  // Active parking transactions
     public List<Car> parkedCars;                  // Currently parked cars
+    private static final long MAX_ALLOWED_PARKING_DURATION = 24;
     
     // Constructor to initialize a parking lot with an ID, address, capacity, rate, and exit scan flag
     public ParkingLot(String lotId, Address address, int capacity, double baseRate, boolean scanOnExit) {
@@ -30,10 +36,17 @@ public class ParkingLot {
     }
    
     // Handles car entry, creating a new ParkingTransaction
-    public ParkingTransaction entry(Car car) throws InvalidParkingPassException, ParkingLotFullException {
+    public ParkingTransaction entry(Car car) throws InvalidParkingPassException, ParkingLotFullException, CarAlreadyParkedException {
         // Ensure the parking lot is not full before allowing entry
         if (transactions.size() >= capacity) {
             throw new ParkingLotFullException("Parking lot is full.");
+        }
+        
+        // Check if the car is already parked in the lot
+        for (ParkingTransaction transaction : transactions) {
+            if (transaction.getCar().equals(car)) {
+                throw new CarAlreadyParkedException("This car is already parked in the lot.");
+            }
         }
 
         // Create a new parking transaction and track the car
@@ -45,10 +58,22 @@ public class ParkingLot {
     }
 
     // Handles car exit, calculates the charge, and finalizes the transaction.
-    public void exit(ParkingTransaction transaction) throws InvalidParkingPassException {
+    public void exit(ParkingTransaction transaction) throws InvalidParkingPassException, CarNotParkedException, ParkingDurationTooLongException {
         // Validate if the transaction exists in the parking lot
         if (transaction == null || !transactions.contains(transaction)) {
             throw new InvalidParkingPassException("Car has not entered the parking lot.");
+        }
+        
+        // Check if the car is in the parking lot (not in the transaction list)
+        if (!transactions.contains(transaction)) {
+            throw new CarNotParkedException("The car is not parked in this lot.");
+        }
+        
+        // After a car exits, if the parking duration exceeds the allowed time limit (24 hours), this exception can be thrown
+        long duration = ChronoUnit.HOURS.between(transaction.getEntryTime(), transaction.getExitTime(null));
+        
+        if (duration > MAX_ALLOWED_PARKING_DURATION) { 
+            throw new ParkingDurationTooLongException("Parking duration exceeds the allowed limit.");
         }
 
         // Record exit time and calculate charge
@@ -73,7 +98,7 @@ public class ParkingLot {
 
         // Applies scan-on-exit logic
         if (scanOnExit) {
-            long hoursParked = java.time.Duration.between(transaction.getEntryTime(), transaction.getExitTime()).toHours();
+            long hoursParked = java.time.Duration.between(transaction.getEntryTime(), transaction.getExitTime(null)).toHours();
             return rate * Math.max(hoursParked, 3); // At least 3 hours charged
         }
 
@@ -91,10 +116,15 @@ public class ParkingLot {
         return null; // Return null if no transaction found for the car
     }
 
-        
+
+	public double getHourlyRate() {
+		return 0;
+	}
+	
     // Override the toString method to return a custom string representation of the parking lot
     @Override
     public String toString() {
         return "ParkingLot[ID: " + lotId + ", Capacity: " + capacity + ", Rate: " + baseRate + "]";
     }
+
 }

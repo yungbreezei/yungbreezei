@@ -1,6 +1,7 @@
 package week9Project;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class ParkingTransaction {
 	
@@ -47,7 +48,7 @@ public class ParkingTransaction {
     }
 
     // Getter: exit time of the car, if it exits
-    public LocalDateTime getExitTime() {
+    public LocalDateTime getExitTime(LocalDateTime plusMinutes) {
         return exitTime;
     }
 
@@ -61,6 +62,19 @@ public class ParkingTransaction {
         return parkingLot;
     }
     
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof ParkingTransaction)) return false;
+        ParkingTransaction that = (ParkingTransaction) obj;
+        return Objects.equals(car, that.car) && Objects.equals(entryTime, that.entryTime);
+    }
+    
+    @Override
+    public int hashCode() {
+        return Objects.hash(car, entryTime);
+    }
+    
     // Provides a string representation of the parking transaction
     @Override
     public String toString() {
@@ -69,4 +83,5 @@ public class ParkingTransaction {
                ", Exit: " + (exitTime != null ? exitTime : "Still Parked") + 
                ", Charge: " + charge + "]";
     }
+
 }

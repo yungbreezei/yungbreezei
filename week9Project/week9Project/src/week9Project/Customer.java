@@ -66,7 +66,6 @@ public class Customer {
         }
         this.phoneNumber = phoneNumber; // Update phone number if valid
     }
-
     
     // Adds a charge to the customer’s balance
     public void addCharge(double amount) {
@@ -80,6 +79,11 @@ public class Customer {
     // Getter: for customer ID
     public String getCustomerId() {
         return customerId;
+    }
+    
+    // Checks if the customer has a car with the given license plate
+    public boolean hasCar(String licensePlate) {
+        return cars.containsKey(licensePlate);
     }
     
     // Getter: Customer's name

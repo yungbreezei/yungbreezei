@@ -3,7 +3,10 @@ package week9Project;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import week9Project.exceptions.CarAlreadyParkedException;
+import week9Project.exceptions.CarNotParkedException;
 import week9Project.exceptions.InvalidParkingPassException;
+import week9Project.exceptions.ParkingDurationTooLongException;
 import week9Project.exceptions.ParkingLotFullException;
 
 import java.time.LocalDate;
@@ -27,7 +30,7 @@ public class ParkingLotTest {
 
     // Test case to verify the entry of a car into the parking lot
     @Test
-    void testEntry() throws InvalidParkingPassException, ParkingLotFullException {
+    void testEntry() throws InvalidParkingPassException, ParkingLotFullException, CarAlreadyParkedException {
         ParkingTransaction transaction = parkingLot.entry(car);
         assertNotNull(transaction);
         assertEquals(1, parkingLot.transactions.size());
@@ -36,18 +39,18 @@ public class ParkingLotTest {
     
     // Test case to verify the exit of a car from the parking lot
     @Test
-    void testExit() throws InvalidParkingPassException, ParkingLotFullException {
+    void testExit() throws InvalidParkingPassException, ParkingLotFullException, CarAlreadyParkedException, CarNotParkedException, ParkingDurationTooLongException {
         ParkingTransaction transaction = parkingLot.entry(car);
         LocalDateTime exitTime = LocalDateTime.now();
         parkingLot.exit(transaction);
 
-        assertNotNull(transaction.getExitTime());
+        assertNotNull(transaction.getExitTime(exitTime));
         assertTrue(transaction.getCharge() > 0);
     }
     
     // Test: Verify that the charge is calculated correctly based on the parking duration and rate
     @Test
-    void testChargeCalculation() throws InvalidParkingPassException, ParkingLotFullException {
+    void testChargeCalculation() throws InvalidParkingPassException, ParkingLotFullException, CarAlreadyParkedException, CarNotParkedException, ParkingDurationTooLongException {
         ParkingLot parkingLot = new ParkingLot("P6", new Address(null, null, null, null), 2, 10.0, true);
         Car compactCar = new Car("XYZ-123", CarType.COMPACT, "C004", true, LocalDate.of(2025, 5, 20));
 
@@ -80,7 +83,7 @@ public class ParkingLotTest {
     
     // Test: After exiting a car, verify that the lot should become available again (especially if using a limited-capacity lot)
     @Test
-    void testLotAvailabilityAfterExit() throws InvalidParkingPassException, ParkingLotFullException {
+    void testLotAvailabilityAfterExit() throws InvalidParkingPassException, ParkingLotFullException, CarAlreadyParkedException, CarNotParkedException, ParkingDurationTooLongException {
         // Set up a parking lot with a capacity of 2 cars
         ParkingLot parkingLot = new ParkingLot("P6", new Address(null, null, null, null), 2, 10.0, true);
         Car car1 = new Car("LMN-123", CarType.COMPACT, "C009", true, LocalDate.of(2025, 9, 20));
@@ -121,7 +124,7 @@ public class ParkingLotTest {
 
     
     @Test
-    void testLotFullWhenCapacityIsReached() throws InvalidParkingPassException, ParkingLotFullException {
+    void testLotFullWhenCapacityIsReached() throws InvalidParkingPassException, ParkingLotFullException, CarAlreadyParkedException {
         ParkingLot fullLot = new ParkingLot("P3", new Address(null, null, null, null), 1, 10.0, true);
         Car car1 = new Car("XYZ-123", CarType.COMPACT, "C006", true, LocalDate.of(2025, 5, 20));
         Car car2 = new Car("XYZ-789", CarType.SUV, "C007", true, LocalDate.of(2025, 6, 20));

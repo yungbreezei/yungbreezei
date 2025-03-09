@@ -24,7 +24,7 @@ public class ParkingTransactionTest {
     void testExit() {
         LocalDateTime exitTime = LocalDateTime.now().plusHours(2);
         transaction.exit(exitTime, 8.0);
-        assertNotNull(transaction.getExitTime());
+        assertNotNull(transaction.getExitTime(exitTime));
         assertEquals(8.0, transaction.getCharge(), 0.01); // Using delta for double comparison
     }
 
