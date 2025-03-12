@@ -36,11 +36,16 @@ public class ParkingLot {
     }
    
     // Handles car entry, creating a new ParkingTransaction
-    public ParkingTransaction entry(Car car) throws InvalidParkingPassException, ParkingLotFullException, CarAlreadyParkedException {
-        // Ensure the parking lot is not full before allowing entry
+    public ParkingTransaction entry(Car car, ParkingPermit permit) throws InvalidParkingPassException, ParkingLotFullException, CarAlreadyParkedException {
+        if (permit == null || permit.isExpired()) {
+            throw new InvalidParkingPassException("Permit is expired or invalid.");
+        }
+    	
+    	// Ensure the parking lot is not full before allowing entry
         if (transactions.size() >= capacity) {
             throw new ParkingLotFullException("Parking lot is full.");
         }
+        
         
         // Check if the car is already parked in the lot
         for (ParkingTransaction transaction : transactions) {
@@ -69,9 +74,20 @@ public class ParkingLot {
             throw new CarNotParkedException("The car is not parked in this lot.");
         }
         
-        // After a car exits, if the parking duration exceeds the allowed time limit (24 hours), this exception can be thrown
-        long duration = ChronoUnit.HOURS.between(transaction.getEntryTime(), transaction.getExitTime(null));
+        // Set exit time before calculations
+        transaction.setExitTime(LocalDateTime.now());
         
+        // Ensure exit time is set before using it in calculations
+        if (transaction.getEntryTime() == null || transaction.getExitTime() == null) {
+            throw new IllegalStateException("Entry or Exit time cannot be null.");
+        }
+        
+        long duration = ChronoUnit.HOURS.between(transaction.getEntryTime(), transaction.getExitTime());
+        transaction.setCharge(duration * baseRate);
+        
+//        // After a car exits, if the parking duration exceeds the allowed time limit (24 hours), this exception can be thrown
+//        long duration = ChronoUnit.HOURS.between(transaction.getEntryTime(), transaction.getExitTime());
+//        
         if (duration > MAX_ALLOWED_PARKING_DURATION) { 
             throw new ParkingDurationTooLongException("Parking duration exceeds the allowed limit.");
         }
@@ -98,7 +114,7 @@ public class ParkingLot {
 
         // Applies scan-on-exit logic
         if (scanOnExit) {
-            long hoursParked = java.time.Duration.between(transaction.getEntryTime(), transaction.getExitTime(null)).toHours();
+            long hoursParked = java.time.Duration.between(transaction.getEntryTime(), transaction.getExitTime()).toHours();
             return rate * Math.max(hoursParked, 3); // At least 3 hours charged
         }
 
@@ -126,5 +142,6 @@ public class ParkingLot {
     public String toString() {
         return "ParkingLot[ID: " + lotId + ", Capacity: " + capacity + ", Rate: " + baseRate + "]";
     }
+
 
 }

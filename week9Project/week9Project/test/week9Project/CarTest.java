@@ -72,4 +72,42 @@ public class CarTest {
         car.setPermit("P456", expiredDate);
         assertFalse(car.hasValidParkingPass(), "Expired permit should invalidate parking pass.");
     }
+    
+    // Test clearing the permit
+    @Test
+    void testClearPermit() {
+        // Initially set a permit
+        car.setPermit("P123", LocalDate.of(2025, 12, 31));
+
+        assertEquals("P123", car.getPermit(), "Permit should be set correctly.");
+        assertTrue(car.hasValidParkingPass(), "Parking pass should be valid.");
+
+        // Clear the permit
+        car.clearPermit();
+
+        assertNull(car.getPermit(), "Permit should be cleared.");
+        assertFalse(car.hasValidParkingPass(), "Parking pass should be invalid after clearing permit.");
+    }
+
+    // Test when the permit has just expired (not valid anymore)
+    @Test
+    void testExpiredPermit() {
+        LocalDate expiredDate = LocalDate.of(2023, 1, 1);
+        car.setPermit("P789", expiredDate);
+
+        assertEquals("P789", car.getPermit(), "Permit should be set correctly.");
+        assertFalse(car.hasValidParkingPass(), "Parking pass should be invalid due to expired permit.");
+    }
+
+    // Test that the car's parking pass validity is updated correctly when expiration date changes
+    @Test
+    void testPermitExpirationUpdate() {
+        // Set a permit with a future expiration date
+        car.setPermit("P101", LocalDate.of(2025, 12, 31));
+        assertTrue(car.hasValidParkingPass(), "Parking pass should be valid.");
+
+        // Update the permit to an expired one
+        car.setPermit("P101", LocalDate.of(2023, 1, 1));
+        assertFalse(car.hasValidParkingPass(), "Parking pass should be invalid after expiration update.");
+    }
 }

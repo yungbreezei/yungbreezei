@@ -1,8 +1,13 @@
 package week9Project;
 
 import java.time.LocalDateTime;
+import java.util.Calendar;
 import java.util.Objects;
 
+/**
+ * This is the class that manages the parking transactions. It stores that permit
+ * and which lot the vehicle is using.
+ */
 public class ParkingTransaction {
 	
     // Attributes 
@@ -11,19 +16,26 @@ public class ParkingTransaction {
     private LocalDateTime exitTime;      // Time when the car exits the parking lot (nullable until exit)
     private double charge;               // Parking fee for the transaction
     private ParkingLot parkingLot;       // The parking lot where the car is parked
+    
+    
+    //week 10
+    private Calendar transactionDate;
+    private Money feeCharged;
+    private ParkingPermit permit;
+
 
 
     // Constructor to initialize a new parking transaction.
     public ParkingTransaction(Car car, LocalDateTime entryTime, ParkingLot parkingLot) {
         this.car = car;                  // Associate a car with the transaction
-        this.entryTime = entryTime;      // Record the entry time
+        this.entryTime = Objects.requireNonNull(entryTime, "Entry time cannot be null");      // Record the entry time
         this.exitTime = null;            // Exit time is null until the car leaves
         this.charge = 0.0;               // Initialize charge to zero
         this.parkingLot = parkingLot;    // Associate a parking lot with the transaction
 
     }
 
-    // Exit method: Sets the exit time and applies the charge
+	// Exit method: Sets the exit time and applies the charge
     public void exit(LocalDateTime exitTime, double charge) {
         this.exitTime = exitTime;        // Set the exit time
         setCharge(charge);               // Validate and set the charge using the setter
@@ -48,8 +60,12 @@ public class ParkingTransaction {
     }
 
     // Getter: exit time of the car, if it exits
-    public LocalDateTime getExitTime(LocalDateTime plusMinutes) {
+    public LocalDateTime getExitTime() {
         return exitTime;
+    }
+    
+    public void setExitTime(LocalDateTime exitTime) {
+        this.exitTime = Objects.requireNonNull(exitTime, "Exit time cannot be null");
     }
 
     // Getter: retrieves the parking fee for this transaction

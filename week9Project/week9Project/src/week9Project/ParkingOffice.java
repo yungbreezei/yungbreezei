@@ -1,5 +1,6 @@
 package week9Project;
 
+import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -9,14 +10,19 @@ public class ParkingOffice<T extends Car> {
     private Map<String, Customer> customers; // Stores customers by customer ID
     private List<ParkingLot> parkingLots; // Manages multiple parking lots
     private Map<String, List<ParkingTransaction>> transactions; // Track transactions per customer
+    
+    //week 10:
+    private Address parkingOfficeAddress;
 
 
     // Constructor initializes office with name, customer map, and parking lot list
-    public ParkingOffice(String officeName) {
+    public ParkingOffice(String officeName, Address parkingOfficeAddress) {
         this.officeName = officeName;
         this.customers = new HashMap<>();
         this.parkingLots = new ArrayList<>();
         this.transactions = new HashMap<>();
+        
+        this.parkingOfficeAddress = parkingOfficeAddress;
     }
 
     // Register a new customer with their details
@@ -29,6 +35,7 @@ public class ParkingOffice<T extends Car> {
     }
     
     // Register a car for a customer and associate with their account
+    // week 10 register(Car) : ParkingPermit
     public Car registerCar(String customerId, String licensePlate, CarType type) {
         Customer customer = customers.get(customerId);
         if (customer == null) {
@@ -49,20 +56,17 @@ public class ParkingOffice<T extends Car> {
     }
 
     // Process car entry into the first available parking lot
-    public ParkingTransaction enterParking(T car) throws Exception {
+    public ParkingTransaction enterParking(T car, ParkingPermit permit) throws Exception {
         for (ParkingLot lot : parkingLots) {
-            // Check if the parking lot has space available by comparing size of parkedCars to capacity
+        	
             if (lot.parkedCars.size() < lot.capacity) {
-            	ParkingTransaction transaction = lot.entry(car);  // Create and store the transaction
-                
-                // Store transaction per customer
+                ParkingTransaction transaction = lot.entry(car, permit);  // Pass permit here
                 String customerId = car.getOwner(); 
                 transactions.computeIfAbsent(customerId, k -> new ArrayList<>()).add(transaction); 
-                
                 return transaction;
             }
         }
-        throw new Exception("No available parking lot.");  // If no space in any parking lot
+        throw new Exception("No available parking lot.");
     }
 
     // Process car exit by locating the transaction and completing it
@@ -81,9 +85,7 @@ public class ParkingOffice<T extends Car> {
     public Collection<Customer> getCustomers() {
         return customers.values();
     }
-    
-    // WEEK 9: ADDING NEW METHODS
-    
+        
     // New method: Get all customer IDs
     public Set<String> getCustomerIds() {
         return customers.keySet();
@@ -102,10 +104,33 @@ public class ParkingOffice<T extends Car> {
                 .map(ParkingPermit::getId)
                 .collect(Collectors.toSet());
     }
+    
+    //week 10:
+    public String officeName() {
+    	return officeName;
+    }
+    
+    //park(Date, ParkingPermit, ParkingLot) : ParkingTransaction
+    public ParkingTransaction park(LocalDate date, ParkingPermit permit, ParkingLot parkingLot) {
+		return null;
+    	
+    }
+    
+    //getParkingCharges(ParkingPermit) : Money
+    public Money getParkingCharges(ParkingPermit permit) {
+		return null;
+    	
+    }
+    
+    //getParkingCharges(Customer) : Money
+    public Money getParkingCharges(Customer customer) {
+		return null;
+    	
+    }
 
     @Override
     public String toString() {
-        return "ParkingOffice[Name: " + officeName + ", Customers: " + customers.size() +
-               ", Lots: " + parkingLots.size() + "]";
+        return "ParkingOffice[Name: " + officeName + ", Office Address: " + parkingOfficeAddress + 
+        	", Customers: " + customers.size() + ", Lots: " + parkingLots.size() + "]";
     }
 }
