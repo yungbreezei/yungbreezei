@@ -40,7 +40,7 @@ public class TransactionManagerTest {
         permit = new ParkingPermit("P456", car, expirationDate, registrationDate);
 
     }
-
+    // Verifies that a car can be parked in a parking lot, and charges can be set correctly.
     @Test
     void testPark() throws CarAlreadyParkedException, DuplicatePermitException {
         // Create a valid customer, car, and permit
@@ -67,7 +67,7 @@ public class TransactionManagerTest {
     }
 
 
-
+    // Verifies that the total parking charges can be retrieved for a parked car
     @Test
     void testGetParkingCharges() throws CarAlreadyParkedException, DuplicatePermitException {
         // Create a valid customer, car, and permit
@@ -88,12 +88,13 @@ public class TransactionManagerTest {
         Money totalCharges = transactionManager.getParkingCharges(permit);
         assertEquals(15.0, totalCharges.getDollars(), "Total parking charges should be 15.0.");
     }
-
+    
+    //Verifies that a transaction can be completed and marked as completed
     @Test
     void testCompleteTransaction() throws CarAlreadyParkedException, NoActiveTransactionException, InvalidParkingPassException, DuplicatePermitException {
         // Create a valid customer, car, and permit
         Car car = new Car("XYZ123", CarType.SUV, "123", false, LocalDate.now().plusYears(1)); // Use customer ID as owner
-        ParkingPermit permit = new ParkingPermit("P123", car, Calendar.getInstance(), Calendar.getInstance());
+        ParkingPermit permit = new ParkingPermit("P123", car, expirationDate, Calendar.getInstance());
 
         // Register the permit with the PermitManager
         permitManager.register(car);
@@ -111,7 +112,7 @@ public class TransactionManagerTest {
         assertTrue(transaction.isCompleted(), "The transaction should be marked as completed.");
     }
 
-
+    // Verifies that an exception is thrown when completing a transaction with an expired permit.
     @Test
     void testCompleteTransactionWithExpiredPermit() throws CarAlreadyParkedException, DuplicatePermitException {
         // Create a valid customer, car, and parking lot
@@ -134,7 +135,7 @@ public class TransactionManagerTest {
             "Should throw InvalidParkingPassException for expired permit.");
     }
 
-
+    // Verifies that an exception is thrown when attempting to complete a transaction that doesn't exist
     @Test
     void testNoActiveTransaction() throws CarAlreadyParkedException, DuplicatePermitException {
         // Create a valid customer, car, and parking lot
@@ -151,7 +152,7 @@ public class TransactionManagerTest {
             "Should throw NoActiveTransactionException when no active transaction exists.");
     }
 
-
+    // Verifies that a CarAlreadyParkedException is thrown when trying to park a car that is already parked
     @Test
     void testCarAlreadyParkedException() throws CarAlreadyParkedException, DuplicatePermitException {
         // Create a valid customer, car, and parking lot
@@ -173,6 +174,7 @@ public class TransactionManagerTest {
         assertThrows(CarAlreadyParkedException.class, () -> transactionManager.park(Calendar.getInstance(), permit, parkingLot), "Should throw CarAlreadyParkedException when the car is already parked.");
     }
     
+    // Verifies that the parking fee is calculated correctly based on the duration of parking
     @Test
     void testTransactionFeeCalculation() throws CarAlreadyParkedException {
         ParkingTransaction transaction = transactionManager.park(Calendar.getInstance(), permit, parkingLot);
@@ -188,5 +190,54 @@ public class TransactionManagerTest {
         // Check if the fee charged matches the expected fee
         assertEquals(expectedFee, transaction.getCharge(), "The parking fee should match the expected fee.");
     }
+
+    // Verifies that parking transactions for different cars are handled independently
+    @Test
+    void testMultipleTransactionsForDifferentCars() throws CarAlreadyParkedException, NoActiveTransactionException, InvalidParkingPassException {
+        Car car1 = new Car("ABC123", CarType.COMPACT, "101", true, LocalDate.now().plusYears(1));
+        Car car2 = new Car("DEF456", CarType.SUV, "102", true, LocalDate.now().plusYears(1));
+
+        ParkingPermit permit1 = new ParkingPermit("P101", car1, expirationDate, Calendar.getInstance());
+        ParkingPermit permit2 = new ParkingPermit("P102", car2, expirationDate, Calendar.getInstance());
+
+        // Park and complete transactions
+        transactionManager.park(Calendar.getInstance(), permit1, parkingLot);
+        transactionManager.completeTransaction(permit1); // Assume fee is set during completion
+        
+        transactionManager.park(Calendar.getInstance(), permit2, parkingLot);
+        transactionManager.completeTransaction(permit2); // Assume fee is set during completion
+
+        // Check individual charges
+        Money chargesCar1 = transactionManager.getParkingCharges(permit1);
+        Money chargesCar2 = transactionManager.getParkingCharges(permit2);
+
+        assertNotNull(chargesCar1, "The parking charges for car1 should not be null.");
+        assertNotNull(chargesCar2, "The parking charges for car2 should not be null.");
+
+        // Check that each car has independent charges
+        assertEquals(25.0, chargesCar1.getDollars(), "Car 1's charges should be correct.");
+        assertEquals(25.0, chargesCar2.getDollars(), "Car 2's charges should be correct.");
+        
+        // Check total charges are the sum of both
+        assertEquals(50.0, chargesCar1.getDollars() + chargesCar2.getDollars(), 
+                "Both cars should have independent charges and the sum should match.");
+    }
+
+    // Verifies that the parking charges can be retrieved by using a parking permit instead of a license plate number
+    @Test
+    void testGetParkingChargesByLicensePlate() throws CarAlreadyParkedException, NoActiveTransactionException, InvalidParkingPassException {
+        Car car1 = new Car("ABC123", CarType.COMPACT, "101", false, LocalDate.now().plusYears(1));
+    	
+    	// have a permit object for the test
+        ParkingPermit permit = new ParkingPermit("P101", car1, Calendar.getInstance(), Calendar.getInstance());
+        transactionManager.park(Calendar.getInstance(), permit, parkingLot);
+        transactionManager.completeTransaction(permit);
+        
+        // Now checking parking charges using the permit
+        Money charges = transactionManager.getParkingCharges(permit);  // Use the permit instead of license plate string
+        assertTrue(charges.compareTo(new Money(0)) > 0, "The parking charges should be greater than 0 after completing the transaction.");
+    }
+    
+
 
 }

@@ -47,8 +47,6 @@ public class TransactionManager {
 
 	        return transaction;  // return The newly created ParkingTransaction.
 	    }
-	    
-	    
 
 	    /**
 	     * Calculates total parking charges for a specific parking permit.
@@ -57,35 +55,20 @@ public class TransactionManager {
 	    public Money getParkingCharges(ParkingPermit permit) {
 	    	
 	        // Initialize total charges with a default value of 0
-	        Money totalCharges = new Money(0);
+	        Money totalCharges = new Money(0.0);
 	        String licensePlate = permit.getCar().getLicensePlate();
 	        
 	        if (vehicleTransaction.containsKey(licensePlate)) {
-	            for (ParkingTransaction transaction : vehicleTransaction.get(licensePlate)) {
-	                System.out.println("Adding charge: " + transaction.getCharge().getDollars());
-	                totalCharges = totalCharges.add(transaction.getCharge());
-	            }
-	        }
-
-	        return totalCharges; // return The total parking charges as a Money object.
-	    }
-
-	    /**
-	     * Calculates total parking charges for a specific vehicle using its license plate.
-	     * @param licensePlate The license plate of the vehicle.
-	     */
-	    public Money getParkingCharges(String licensePlate) {
-	        Money totalCharges = new Money(0);
-
-	        if (vehicleTransaction.containsKey(licensePlate)) {
-	            for (ParkingTransaction transaction : vehicleTransaction.get(licensePlate))
+	            for (ParkingTransaction transaction : vehicleTransaction.get(licensePlate)) 
 	            {
 	                totalCharges = totalCharges.add(transaction.getCharge());
+	            	
 	            }
 	        }
 
 	        return totalCharges; // return The total parking charges as a Money object.
 	    }
+
 
 	    /**
 	     * Processes the exit of a car by completing the parking transaction associated

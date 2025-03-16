@@ -34,6 +34,7 @@ public class ParkingTransaction {
         this.parkingLot = Objects.requireNonNull(parkingLot, "Parking lot cannot be null");
         this.transactionDate = Calendar.getInstance();  // Set transaction date to current time
         this.feeCharged = new Money(0.0);  // Initialize feeCharged with a default value
+        this.charge = new Money(0.0);  // Ensure charge is initialized
         this.permit = permit;  // Use the permit passed to the constructor
     }
     
@@ -80,7 +81,7 @@ public class ParkingTransaction {
 
     // Getter: retrieves the parking fee for this transaction
     public Money getCharge() {
-        return charge;
+        return charge != null ? charge : new Money(0.0);
     }
     
     // Method to get the associated parking lot for the transaction
